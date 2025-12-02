@@ -16,70 +16,95 @@ class _MyStatelessState extends State<MyStateless> {
   @override
   void initState() {
     super.initState();
-
-    /// call function on render complete
     _calculateMoneyColor();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Stateless Widget')),
+      appBar: AppBar(
+        title: Text('My Money'),
+        centerTitle: true,
+        elevation: 2,
+      ),
       body: ListView(
         padding: EdgeInsets.all(20),
         children: [
-          Center(
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text('My Money Now: ', style: TextStyle(fontSize: 20)),
-                Text(
-                  '$myMoney',
-                  style: TextStyle(
-                    color: moneyColor,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 30,
+          /// MONEY DISPLAY CARD
+          Card(
+            elevation: 4,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: Padding(
+              padding: EdgeInsets.symmetric(vertical: 25, horizontal: 15),
+              child: Column(
+                children: [
+                  Text(
+                    'My Money Now',
+                    style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
-                ),
-              ],
+                  SizedBox(height: 8),
+                  Text(
+                    '$myMoney',
+                    style: TextStyle(
+                      color: moneyColor,
+                      fontSize: 40,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
+
+          SizedBox(height: 20),
+
+          /// CHILD WIDGETS
           MyMoneyStatus(currentMoney: myMoney),
           MyHouseDependOnMyMoney(currentMoney: myMoney),
-          SizedBox(height: 50),
+
+          SizedBox(height: 40),
+
+          /// WITHDRAW BUTTON
           ElevatedButton.icon(
-            onPressed: () {
-              /// check if can decrease
-              if (myMoney == 0) {
-                return;
-              }
-
-              /// decrease
-              setState(() {
-                myMoney -= 1;
-              });
-
-              /// calculate
-              _calculateMoneyColor();
-            },
-            label: Text('Withdraw'),
+            onPressed: myMoney == 0
+                ? null
+                : () {
+                    setState(() => myMoney -= 1);
+                    _calculateMoneyColor();
+                  },
             icon: Icon(Icons.remove_circle),
+            label: Text(
+              'Withdraw',
+              style: TextStyle(fontSize: 18),
+            ),
+            style: ElevatedButton.styleFrom(
+              padding: EdgeInsets.symmetric(vertical: 15),
+            ),
           ),
-          SizedBox(height: 10),
+
+          SizedBox(height: 15),
+
+          /// DEPOSIT BUTTON
           ElevatedButton.icon(
             onPressed: () {
-              /// increase
-              setState(() {
-                myMoney += 1;
-              });
-
-              /// calculate
+              setState(() => myMoney += 1);
               _calculateMoneyColor();
             },
-            label: Text('Deposit', style: TextStyle(color: Colors.white)),
             icon: Icon(Icons.add_circle),
-            style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
+            label: Text(
+              'Deposit',
+              style: TextStyle(fontSize: 18),
+            ),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.green,
+              padding: EdgeInsets.symmetric(vertical: 15),
+              foregroundColor: Colors.white,
+            ),
           ),
         ],
       ),

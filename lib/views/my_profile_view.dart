@@ -35,7 +35,7 @@ class MyProfileView extends StatelessWidget {
               ],
             ),
           ),
-          buildSettingsList(context), // pass context here
+          buildSettingsList(context),
         ],
       ),
     );
@@ -56,9 +56,7 @@ Widget buildSettingsList(BuildContext context) {
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(
-                builder: (context) =>
-                    const MyStateless()), // Make sure MyStateless exists
+            MaterialPageRoute(builder: (context) => const MyStateless()),
           );
         },
       ),
