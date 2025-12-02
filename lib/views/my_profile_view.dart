@@ -7,6 +7,9 @@ class MyProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Back"),
+      ),
       body: ListView(
         padding: EdgeInsets.all(25),
         children: [
