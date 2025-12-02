@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import './my_money_status.dart';
-import './my_house_depend_on_my_money.dart';
 
 class MyStateless extends StatefulWidget {
   const MyStateless({super.key});
@@ -24,8 +23,6 @@ class _MyStatelessState extends State<MyStateless> {
     return Scaffold(
       appBar: AppBar(
         title: Text('My Money'),
-        centerTitle: true,
-        elevation: 2,
       ),
       body: ListView(
         padding: EdgeInsets.all(20),
